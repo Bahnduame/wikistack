@@ -1,5 +1,6 @@
 var express = require('express');
 var swig = require('swig');
+require('./filters')(swig);
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -9,6 +10,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var add_routes = require('./routes/add');
+var about = require('./routes/about');
+var wiki = require('./routes/wiki');
+var edit = require('./routes/edit');
 
 var app = express();
 app.engine('html', swig.renderFile);
@@ -27,6 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/add', add_routes);
+app.use('/about', about);
+app.use('/wiki', wiki);
+app.use('/edit', edit);
+
+
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
